@@ -1,0 +1,27 @@
+services:
+  database:
+    image: "mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_pwd
+    networks:
+      - application
+
+  application:
+    image: "global_solution_2"
+    depends_on:
+      - database
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:mysql://database:3306/api?createDatabaseIfNotExist=true
+      - DATABASE_USER=root
+      - DATABASE_PWD=root_pwd
+    networks:
+      - application
+
+networks:
+  application:
+    driver: bridge
+
