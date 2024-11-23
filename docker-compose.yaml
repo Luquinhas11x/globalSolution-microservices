@@ -5,11 +5,11 @@ services:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root_pwd
-    networks:
-      - application
+    #networks:
+    #  - application
 
   application:
-    image: "global_solution_2"
+    image: "ludushark/globalsolution-2"
     depends_on:
       - database
     ports:
@@ -18,10 +18,9 @@ services:
       - DATABASE_URL=jdbc:mysql://database:3306/api?createDatabaseIfNotExist=true
       - DATABASE_USER=root
       - DATABASE_PWD=root_pwd
-    networks:
-      - application
+    #networks:
+    #  - application
 
 networks:
   application:
     driver: bridge
-
